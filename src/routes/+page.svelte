@@ -43,7 +43,7 @@
 <Cursor />
 
 <div
-  class="flex flex-col h-screen justify-center items-center bg-gray-900 text-white "
+  class="flex flex-col h-screen justify-center items-center bg-gray-900 text-white"
 >
   <h1 class="text-4xl font-bold mb-4">Pomodoro Timer</h1>
   <div class="time text-6xl font-bold mb-4">{formattedTime}</div>
@@ -74,5 +74,9 @@
 <style>
   button:disabled {
     pointer-events: none;
+  }
+
+  body {
+    cursor: none;
   }
 </style>
