@@ -1,75 +1,84 @@
 <script>
-    import { onMount } from "svelte";
-  
-    let time = 25 * 60; // 25 minutes in seconds
-    let timerRunning = false;
-    let intervalId;
-  
-    function startTimer() {
-      if (!timerRunning) {
-        intervalId = setInterval(() => {
-          time = time - 1;
-          if (time <= 0) {
-            stopTimer();
-          }
-        }, 1000);
-        timerRunning = true;
-      }
-    }
-  
-    function stopTimer() {
-      clearInterval(intervalId);
-      timerRunning = false;
-    }
-  
-    function resetTimer() {
-      clearInterval(intervalId);
-      time = 25 * 60;
-      timerRunning = false;
-    }
-  
-    function getFormattedTime() {
-      const minutes = Math.floor(time / 60);
-      const seconds = time % 60;
-      return `${minutes.toString().padStart(2, "0")}:${seconds
-        .toString()
-        .padStart(2, "0")}`;
-    }
-  
-    let timeInterval;
-  
-    onMount(() => {
-      timeInterval = setInterval(() => {
-        $: formattedTime = getFormattedTime();
-      }, 1000);
-    });
-  
-    let formattedTime = getFormattedTime();
-  </script>
-  
-  <div class="flex flex-col h-screen justify-center items-center bg-gray-900 text-white">
-    <h1 class="text-4xl font-bold mb-4">Pomodoro Timer</h1>
-    <div class="time text-6xl font-bold mb-4">{formattedTime}</div>
-    <div class="controls flex justify-center">
-      <button
-        class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-md mr-4"
-        on:click={startTimer}
-        disabled={timerRunning}
-      >
-        Start
-      </button>
-      <button
-        class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-md"
-        on:click={stopTimer}
-        disabled={!timerRunning}
-      >
-        Stop
-      </button>
-    </div>
+  import { onMount } from "svelte";
+  import MouseCursor from "./MouseCursor.svelte";
+
+  let time = 25 * 60; // 25 minutes in seconds
+  let timerRunning = false;
+
+  let formattedTime;
+
+  let intervalId;
+
+  function startTimer() {
+    timerRunning = true;
+    intervalId = setInterval(() => {
+      time = time - 1;
+    }, 1000);
+  }
+
+  function stopTimer() {
+    clearInterval(intervalId);
+    timerRunning = false;
+  }
+
+  function resetTimer() {
+    clearInterval(intervalId);
+    time = 25 * 60;
+    timerRunning = false;
+  }
+
+  function getFormattedTime(time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
+  }
+
+  $: {
+    formattedTime = getFormattedTime(time);
+  }
+
+  onMount(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  });
+</script>
+
+<MouseCursor />
+<div
+  class="flex flex-col h-screen justify-center items-center bg-gray-900 text-white "
+>
+  <h1 class="text-4xl font-bold mb-4">Pomodoro Timer</h1>
+  <div class="time text-6xl font-bold mb-4">{formattedTime}</div>
+  <div class="controls flex justify-center">
     <button
-      class="bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 rounded-md mt-4"
-      on:click={resetTimer}
+      class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-md mr-4"
+      on:click={startTimer}
+      disabled={timerRunning}
     >
-      Reset
+      Start
+    </button>
+    <button
+      class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-md"
+      on:click={stopTimer}
+      disabled={!timerRunning}
+    >
+      Stop
     </button>
   </div>
+  <button
+    class="bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 rounded-md mt-4"
+    on:click={resetTimer}
+  >
+    Reset
+  </button>
+</div>
+
+<style>
+  button:disabled {
+    pointer-events: none;
+  }
+</style>
