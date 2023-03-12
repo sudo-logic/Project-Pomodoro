@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import MouseCursor from "./MouseCursor.svelte";
+  import Cursor from "./cursor.svelte";
 
   let time = 25 * 60; // 25 minutes in seconds
   let timerRunning = false;
@@ -38,16 +38,10 @@
   $: {
     formattedTime = getFormattedTime(time);
   }
-
-  onMount(() => {
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  });
 </script>
 
-<MouseCursor />
+<Cursor />
+
 <div
   class="flex flex-col h-screen justify-center items-center bg-gray-900 text-white "
 >
