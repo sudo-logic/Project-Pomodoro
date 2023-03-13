@@ -1,38 +1,36 @@
-# create-svelte
+# Project Pomodoro
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+A simple Pomodoro Timer built using Svelte and TailwindCSS with a minimalist UI.
 
-## Creating a project
+[Project Pomodoro](https://project-pomodoro.vercel.app/)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Installation
+
+Clone this repository:
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+git clone https://github.com/sudo-logic/Project-Pomodoro.git
 ```
 
-## Developing
+Install dependencies:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```bash
+cd Project-Pomodoro
+npm install
+```
+
+Run the application:
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+## Contributing
 
-To create a production version of your app:
+If you'd like to contribute to this project, feel free to submit a pull request or open an issue.
 
-```bash
-npm run build
-```
+## License
 
-You can preview the production build with `npm run preview`.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+###### Made with ♥️ by [Logic](https://github.com/sudo-logic/) out of boredom and curiosity.

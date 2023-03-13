@@ -76,7 +76,7 @@
     pointer-events: none;
   }
 
-  body {
+  :global(body) {
     cursor: none;
   }
 </style>
